@@ -1,0 +1,61 @@
+*{
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+
+header{
+    display: flex;
+    height: 80px;
+    margin-bottom: 10px;
+    justify-content:space-between;
+    align-items: center;
+    background-color: #ffffff;
+    position: fixed;
+    width: 100%;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+
+    
+}
+header img{
+    margin: 0 20px;
+}
+main{
+    margin-top: 80px;
+    background-color: #e5e5e5;
+    height: 800px;
+    
+}
+footer{
+    display: flex;
+    align-items: center;
+    height: 80px;
+    justify-content: space-between;
+    position: fixed;
+    background-color: #ffffff;
+    width: 100%;
+    top: calc(100% - 80px);
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.rodapé{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    margin: 0 16px;
+}
+footer p {
+    font-family: 'Roboto', sans-serif;
+    font-size: 18px;
+    font-weight: 400;
+    font-style: italic;
+}
+.icone{
+    width: 26px;
+    height: 26px;
+}
