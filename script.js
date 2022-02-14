@@ -48,6 +48,7 @@ function nomeErrado(erro) {
 
 }
 
+
 function renderizarMensagens() {
   let mensagensDoServidor = document.querySelector(".container");
   mensagensDoServidor.innerHTML = "";
@@ -76,10 +77,10 @@ function renderizarMensagens() {
       mensagensDoServidor.innerHTML += ` <div class= "msg normal ${ultimaMensagem}" > 
     <span >(${mensagens[i].time})</span> <div> </div>  <strong> ${mensagens[i].from} </strong>  <div> </div> para Todos: ${mensagens[i].text}  </div>`
     }
+   
   }
-
-  const ultimaMsg = document.querySelector(".ultimaMensagem");
-  ultimaMsg.scrollIntoView();
+ let ultimaMsg = document.querySelector(".ultimaMensagem");
+ ultimaMsg.scrollIntoView();
 
 }
 
@@ -104,7 +105,7 @@ function carregarNovasMensagens() {
 
 //enviar msg do user
 function mandarMsgUser() {
-  let texto = document.querySelector("footer p");
+  let texto = document.querySelector("rodapé p").value;
   const mensagemUsuario = axios.post("https://mock-api.driven.com.br/api/v4/uol/messages", {
     from: usuario.name,
     to: "Todos",
@@ -113,14 +114,16 @@ function mandarMsgUser() {
   });
   mensagemUsuario.then(enviarMsg);
 }
-mandarMsgUser();
+
+
 
 //desaparecer a msg da tela após enviar
-function enviarMsg(resposta) {
+function enviarMsg(mensagens) {
   const footer = document.querySelector(".rodapé");
   footer.innerHTML = `
      <p>Escreva aqui...</p>
-      <ion-icon onclick="mandarMsgUser()" class="ion-icon" name="paper-plane-outline" data-identifier="send-message"></ion-icon>  
+      <ion-icon onclick= "mandarMsgUser()" class="ion-icon" name="paper-plane-outline" data-identifier="send-message"></ion-icon>  
   `;
 }
 
+mandarMsgUser();
