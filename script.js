@@ -62,27 +62,28 @@ function renderizarMensagens() {
 
     if (mensagens[i].type === "status") {
       mensagensDoServidor.innerHTML += `
-      <div class= "msg status ${ultimaMensagem}" >
+      <div class= "msg status ${ultimaMensagem} data-identifier="message"" >
          <span >
             (${mensagens[i].time}) </span> <div> </div>  <strong>   ${mensagens[i].from}   </strong> <div> </div> ${mensagens[i].text} </div>`
     }
     else if (mensagens[i].type === "private_message") {
       if (mensagens[i].to === usuario.name) {
-        mensagensDoServidor.innerHTML += ` <div class= "msg reservada ${ultimaMensagem}" >  <span >  (${mensagens[i].time}) </span> <div> </div> ${mensagens[i].from} reservadamente para <strong>${usuario} </strong> <div> </div>:  ${mensagens[i].text}  </div>`;
+        mensagensDoServidor.innerHTML += ` <div class= "msg reservada ${ultimaMensagem}" data-identifier="message" >  <span >  (${mensagens[i].time}) </span> <div> </div> ${mensagens[i].from} 
+        reservadamente para <strong>${usuario} </strong> <div> </div>:  ${mensagens[i].text}  </div>`;
       }
     }
 
 
     else {
-      mensagensDoServidor.innerHTML += ` <div class= "msg normal ${ultimaMensagem}" > 
+      mensagensDoServidor.innerHTML += ` <div class= "msg normal ${ultimaMensagem}" data-identifier="message"> 
     <span >(${mensagens[i].time})</span> <div> </div>  <strong> ${mensagens[i].from} </strong>  <div> </div> para Todos: ${mensagens[i].text}  </div>`
     }
-   
+
   }
-  Scroll() ;
+  Scroll();
 }
 
-function Scroll(){
+function Scroll() {
   let ultimaMsg = document.querySelector(".ultimaMensagem");
   ultimaMsg.scrollIntoView();
 }
@@ -95,7 +96,7 @@ function atualizar() {
 atualizar();
 
 function usuarioLogado() {
-  const status = axios.post("https://mock-api.driven.com.br/api/v4/uol/status",usuario);
+  const status = axios.post("https://mock-api.driven.com.br/api/v4/uol/status", usuario);
   status.then()
 }
 
@@ -105,8 +106,6 @@ function carregarNovasMensagens() {
 }
 
 
-
-//enviar msg do user
 function enviarMensagem() {
   let texto = document.querySelector("footer input").value;
   const mensagemUsuario = axios.post("https://mock-api.driven.com.br/api/v4/uol/messages", {
@@ -120,13 +119,13 @@ function enviarMensagem() {
 }
 
 function falhaAoEnviar(erro) {
-  alert('Usuário saiu da sala')
+  alert('Usuário não está mais na sala')
   window.location.reload()
 }
 
 
-function enviarMsg(mensagens) {
-  const footer = document.querySelector(".footer");
+function clicarNaMensagem(mensagens) {
+  const f = document.querySelector(".footer");
   footer.innerHTML = `
       <input type="text" placeholder="Escreva aqui..." />
       <ion-icon onclick= "enviarMensagem()" class="ion-icon" name="paper-plane-outline" data-identifier="send-message"></ion-icon>  
