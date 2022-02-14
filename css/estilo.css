@@ -54,11 +54,18 @@ footer ion-icon:hover{
     width: 100%;
     margin: 0 16px;
 }
-footer p {
+footer input {
+    width: 100%;
     font-family: 'Roboto', sans-serif;
     font-size: 18px;
     font-weight: 400;
     font-style: italic;
+    border: none;
+}
+
+footer ::placeholder {
+    color: #000;
+
 }
 .icone{
     width: 26px;

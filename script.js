@@ -79,9 +79,12 @@ function renderizarMensagens() {
     }
    
   }
- let ultimaMsg = document.querySelector(".ultimaMensagem");
- ultimaMsg.scrollIntoView();
+  Scroll() ;
+}
 
+function Scroll(){
+  let ultimaMsg = document.querySelector(".ultimaMensagem");
+  ultimaMsg.scrollIntoView();
 }
 
 function atualizar() {
@@ -104,8 +107,8 @@ function carregarNovasMensagens() {
 
 
 //enviar msg do user
-function mandarMsgUser() {
-  let texto = document.querySelector("rodapé p").value;
+function enviarMensagem() {
+  let texto = document.querySelector("footer input").value;
   const mensagemUsuario = axios.post("https://mock-api.driven.com.br/api/v4/uol/messages", {
     from: usuario.name,
     to: "Todos",
@@ -113,17 +116,21 @@ function mandarMsgUser() {
     type: "message"
   });
   mensagemUsuario.then(enviarMsg);
+  mensagemUsuario.catch(falhaAoEnviar);
+}
+
+function falhaAoEnviar(erro) {
+  alert('Usuário saiu da sala')
+  window.location.reload()
 }
 
 
-
-//desaparecer a msg da tela após enviar
 function enviarMsg(mensagens) {
-  const footer = document.querySelector(".rodapé");
+  const footer = document.querySelector(".footer");
   footer.innerHTML = `
-     <p>Escreva aqui...</p>
-      <ion-icon onclick= "mandarMsgUser()" class="ion-icon" name="paper-plane-outline" data-identifier="send-message"></ion-icon>  
+      <input type="text" placeholder="Escreva aqui..." />
+      <ion-icon onclick= "enviarMensagem()" class="ion-icon" name="paper-plane-outline" data-identifier="send-message"></ion-icon>  
   `;
 }
 
-mandarMsgUser();
+
