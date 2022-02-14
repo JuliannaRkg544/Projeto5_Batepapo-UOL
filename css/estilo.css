@@ -24,9 +24,8 @@ header img{
 }
 main{
     margin-top: 80px;
-    background-color: #e5e5e5;
-    height: 800px;
-    
+    margin-bottom: 80px;
+   
 }
 footer{
     display: flex;
@@ -59,3 +58,59 @@ footer p {
     width: 26px;
     height: 26px;
 }
+.container{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+}
+
+.msg{
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: left;
+    align-items: center;
+    width: 100vw;
+    min-height: 40px;
+    margin: 2px 0;
+
+
+}
+strong{
+    font-weight:700 ;
+}
+span{
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    min-height: 40px;
+    color: #aaaaaa ;
+}
+
+.status{
+    background-color: #dcdcdc;
+    display: flex;
+    flex-wrap: wrap;
+
+}
+.reservada{
+    background-color:#ffdede ;
+    display: flex;
+    flex-wrap: wrap;
+
+}
+.normal{
+    background-color: #ffffff;
+    display: flex;
+    flex-wrap: wrap; 
+}
+div{
+    width: 3px;
+}
+
+

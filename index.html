@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -12,22 +13,33 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <title>Bate-Papo UOL</title>
 </head>
+
 <body>
     <header>
         <img src="logo 1.png" alt="">
-        <img src="Vector.png" alt="">
+        <img src="Vector.png" onclick="abrirMenu()" alt="">
     </header>
     <main>
+        <div class="container">
+            <div class="msg">
+               <div class="msg status"> </div>
+               <div class="msg reservada" ></div>
+               <div class="msg normal"></div>
+            </div>
+
+        </div>
 
     </main>
     <footer>
-        <div class="rodapé" >
- <p>Escreva aqui...</p>
-        <ion-icon class="icone" name="paper-plane-outline"></ion-icon>
+        <div class="rodapé">
+            <p>Escreva aqui...</p>
+            <ion-icon class="icone" name="paper-plane-outline" onclick="enviarMensagem"></ion-icon>
         </div>
-       
+
     </footer>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
-<script src="script.js"></script>
+    <script src="script.js"></script>
 </body>
+
 </html>
