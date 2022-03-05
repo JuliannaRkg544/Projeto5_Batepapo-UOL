@@ -52,31 +52,37 @@ function nomeErrado(erro) {
 function renderizarMensagens() {
   let mensagensDoServidor = document.querySelector(".container");
   mensagensDoServidor.innerHTML = "";
-  let ultimaMensagem = "";
 
   for (let i = 0; i < mensagens.length; i++) {
-    if (i == (mensagens.length - 1)) {
+  /*  if (i == (mensagens.length - 1)) {
       ultimaMensagem = "ultima";
     }
-
+*/
 
     if (mensagens[i].type === "status") {
       mensagensDoServidor.innerHTML += `
-      <div class= "msg status ${ultimaMensagem} data-identifier="message"" >
+      <div class= "msg status data-identifier="message"" >
          <span >
             (${mensagens[i].time}) </span> <div> </div>  <strong>   ${mensagens[i].from}   </strong> <div> </div> ${mensagens[i].text} </div>`
     }
     else if (mensagens[i].type === "private_message") {
       if (mensagens[i].to === usuario.name) {
-        mensagensDoServidor.innerHTML += ` <div class= "msg reservada ${ultimaMensagem}" data-identifier="message" >  <span >  (${mensagens[i].time}) </span> <div> </div> ${mensagens[i].from} 
+        mensagensDoServidor.innerHTML += ` <div class= "msg reservada " data-identifier="message" >  <span >  (${mensagens[i].time}) </span> <div> </div> ${mensagens[i].from} 
         reservadamente para <strong>${usuario} </strong> <div> </div>:  ${mensagens[i].text}  </div>`;
       }
     }
 
-
-    else {
-      mensagensDoServidor.innerHTML += ` <div class= "msg normal ${ultimaMensagem}" data-identifier="message"> 
+//filtrando msgs
+    else if (mensagens[i].type === "message") {
+      mensagensDoServidor.innerHTML += ` <div class= "msg normal " data-identifier="message"> 
     <span >(${mensagens[i].time})</span> <div> </div>  <strong> ${mensagens[i].from} </strong>  <div> </div> para Todos: ${mensagens[i].text}  </div>`
+    }
+    else{
+      if (mensagens[i].from === usuario || mensagens[i].to === usuario){
+        mensagensDoServidor.innerHTML+= `  <div class= "msg reservada data-identifier="message"" >
+        <span >
+           (${mensagens[i].time}) </span> <div> </div>  <strong>   ${mensagens[i].from}   </strong> <div> </div> reservadamente para <b> ${mensagens[i].to} </b> ${mensagens[i].text} </div>`
+      }
     }
 
   }
@@ -84,7 +90,8 @@ function renderizarMensagens() {
 }
 
 function Scroll() {
-  let ultimaMsg = document.querySelector(".ultimaMensagem");
+  let lastMsg = document.querySelector(".container");
+  let ultimaMsg = lastMsg.lastElementChild
   ultimaMsg.scrollIntoView();
 }
 
@@ -97,7 +104,14 @@ atualizar();
 
 function usuarioLogado() {
   const status = axios.post("https://mock-api.driven.com.br/api/v4/uol/status", usuario);
-  status.then()
+  status.then(function (resposta){
+    console.log("usuario ta on")
+  })
+  status.catch(function(erro){
+    console.log(erro.response);
+    alert("humm, deu ruim pra tu")
+    window.location.reload();
+  })
 }
 
 function carregarNovasMensagens() {
@@ -114,22 +128,19 @@ function enviarMensagem() {
     text: texto,
     type: "message"
   });
-  mensagemUsuario.then(enviarMsg);
+  mensagemUsuario.then( function(resposta){
+    console.log("Enviada com success!!")
+  });
   mensagemUsuario.catch(falhaAoEnviar);
+  texto = "";
 }
 
+
 function falhaAoEnviar(erro) {
-  alert('Usuário não está mais na sala')
+  alert('vish, falha ao enviar sua msg')
   window.location.reload()
 }
 
 
-function clicarNaMensagem(mensagens) {
-  const f = document.querySelector(".footer");
-  footer.innerHTML = `
-      <input type="text" placeholder="Escreva aqui..." />
-      <ion-icon onclick= "enviarMensagem()" class="ion-icon" name="paper-plane-outline" data-identifier="send-message"></ion-icon>  
-  `;
-}
 
 
